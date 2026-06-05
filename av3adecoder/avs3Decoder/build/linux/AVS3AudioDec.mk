@@ -5,7 +5,7 @@
 ###             by shengyancong
 ###
 
-NAME = libAVS3AudioDec.so
+NAME = libAVS3AudioDec.a
 OS_ARCH := $(shell uname -m)
 ### include debug information: 1=yes, 0=no
 DBG?= 0
@@ -76,18 +76,18 @@ else
 	CFLAGS += $(OPT_FLAG) -Wall
 endif
 
-CFLAGS += -Wl,--no-undefined -Wl,--retain-symbols-file=retain_symbols.txt -Wl,-version-script=version-script.txt
+CFLAGS += -Wl,--no-undefined 
 
 SRC_DIRS=../../src ../../../libavs3_common ../../../libavs3_debug
 SRC=$(foreach TMP_SRC_DIRS, $(SRC_DIRS), $(wildcard $(TMP_SRC_DIRS)/*.c)) 
-TARGET=../../../bin/libAVS3AudioDec.so
+TARGET=../../../bin/libAVS3AudioDec.a
 OBJ:=$(SRC:.c=.o)
 
 LIB_EXTERN=-L../../lib/  -L../../deps/lib
 INC_EXTERN=-I../../../libavs3_common/ -I../../../libavs3_debug -I../../../../../../../VMFFramework/bin/VMFSDK/include/PlatForm
 
 INCLUDE=$(INC_EXTERN) -I../../include
-DEP_LIB=-lpthread -lm -ldl -lrt $(STATIC) $(LIB_EXTERN)
+DEP_LIB=-lpthread -lm -ldl $(STATIC) $(LIB_EXTERN)
 
 .PHONY: default distclean clean depend
 
@@ -116,11 +116,10 @@ distclean: clean
 	@rm -f $(DEPEND) tags
 	@rm -f $(TARGET)
 
-bin:    $(OBJ)
+bin: $(OBJ)
 	@echo
-	@echo 'creating binary "$(TARGET)"'
-	@$(CC) -shared -fPIC $(CFLAGS) -o $(TARGET) $(OBJ) $(DEP_LIB)
-
+	@echo 'creating static library "$(TARGET)"'
+	@ar rcs $(TARGET) $(OBJ)
 	@echo '... done'
 	@echo
 
@@ -133,6 +132,6 @@ depend:
 	@echo
 
 %.o:%.c
-	$(CC) $(CFLAGS) -fPIC -std=c99 $(INCLUDE) -o $@ -c $<
+	$(CC) $(CFLAGS) -std=c99 $(INCLUDE) -o $@ -c $<
 
 -include $(DEPEND)
