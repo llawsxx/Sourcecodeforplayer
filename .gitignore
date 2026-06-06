@@ -1,0 +1,27 @@
+# 编译中间文件
+*.o
+*.obj
+*.d
+*.d.o
+
+# 静态库
+*.a
+*.lib
+
+# 动态库
+*.dll
+*.so
+*.dylib
+*.dll.a
+*.so.*
+
+# 可执行文件
+*.exe
+*.out
+*.app
+
+# 其他常见产物
+*.log
+*.tmp
+*.swp
+*.bak

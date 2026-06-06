@@ -420,7 +420,8 @@ int Avs3InitDecoder(AVS3DecoderHandle hAvs3Dec, FILE** fModel, const char *model
     }
     else
     {
-        assert(!"Not support codec format in AVS3!\n");
+        LOGD("Not support codec format in AVS3!\n");
+        return AVS3_FALSE;
     }
 
     // Init metadata handle
@@ -428,7 +429,7 @@ int Avs3InitDecoder(AVS3DecoderHandle hAvs3Dec, FILE** fModel, const char *model
 
     hAvs3Dec->hBitstream = hBitstream;
 
-    return 0;
+    return AVS3_TRUE;
 }
 
 void Avs3DecoderDestroy(AVS3DecoderHandle hAvs3Dec)

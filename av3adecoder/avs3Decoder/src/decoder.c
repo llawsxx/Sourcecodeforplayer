@@ -652,9 +652,12 @@ int avs3_decode(AVS3DecoderHandle hAvs3Dec, unsigned char* pDataIN, int nLenIn, 
 	if (!hAvs3Dec->bInited)
 	{
 //		printf("Avs3InitDecoder in\n");
-		Avs3InitDecoder(hAvs3Dec, &hAvs3Dec->fModel, "model.bin");
+		if(Avs3InitDecoder(hAvs3Dec, &hAvs3Dec->fModel, "model.bin") == AVS3_TRUE){
+			hAvs3Dec->bInited = 1;
+		}else{
+			return AVS3_FALSE;
+		}
 //		printf("Avs3InitDecoder out\n");
-		hAvs3Dec->bInited = 1;
 	}
 
 	uint8_t* bitstream = hAvs3Dec->hBitstream->bitstream;
