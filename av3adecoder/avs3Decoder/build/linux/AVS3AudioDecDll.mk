@@ -119,10 +119,13 @@ distclean: clean
 	@rm -f $(DEPEND) tags
 	@rm -f $(TARGET_DLL) $(TARGET_IMPLIB)
 
+DEF_FILE = libAVS3AudioDec.def
+
 bin: $(OBJ)
 	@echo
 	@echo 'creating static library "$(TARGET)"'
-	$(CC) -shared -o $(TARGET_DLL) $(OBJ) $(LDFLAGS) $(DEP_LIB)
+	$(CC) -shared -o $(TARGET_DLL) $(OBJ) $(DEF_FILE) \
+	    -Wl,--out-implib,$(TARGET_IMPLIB) $(LDFLAGS) $(DEP_LIB)
 	@echo '... done'
 	@echo
 

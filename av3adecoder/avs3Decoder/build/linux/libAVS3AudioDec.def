@@ -1,0 +1,6 @@
+LIBRARY "libAVS3AudioDec.dll"
+EXPORTS
+    avs3_create_decoder                  @1
+    avs3_destroy_decoder                 @2
+    avs3_decode                          @3
+    parse_header                         @4
