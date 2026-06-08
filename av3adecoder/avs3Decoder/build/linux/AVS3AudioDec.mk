@@ -12,7 +12,7 @@ DBG?= 0
 ### Generate 32 bit executable : 1=yes, 0=no
 M32?= 0
 ### include O level optimization : 0-3
-OPT?= 0
+OPT?= 3
 ### Static Compilation
 STC?= 0
 ### Support AVX2

@@ -1,0 +1,7 @@
+EXPORTS
+    CreateRenderer
+    PutInterleavedAudioBuffer
+    GetBinauralInterleavedAudioBuffer
+    UpdateMetadata
+    SetListenerPosition
+    DestroyRenderer

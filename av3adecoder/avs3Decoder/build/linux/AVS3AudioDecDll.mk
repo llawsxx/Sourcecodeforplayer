@@ -13,7 +13,7 @@ DBG?= 0
 ### Generate 32 bit executable : 1=yes, 0=no
 M32?= 0
 ### include O level optimization : 0-3
-OPT?= 0
+OPT?= 3
 ### Static Compilation
 STC?= 0
 ### Support AVX2
@@ -123,7 +123,7 @@ DEF_FILE = libAVS3AudioDec.def
 
 bin: $(OBJ)
 	@echo
-	@echo 'creating static library "$(TARGET)"'
+	@echo 'creating shared library "$(TARGET)"'
 	$(CC) -shared -o $(TARGET_DLL) $(OBJ) $(DEF_FILE) \
 	    -Wl,--out-implib,$(TARGET_IMPLIB) $(LDFLAGS) $(DEP_LIB)
 	@echo '... done'
